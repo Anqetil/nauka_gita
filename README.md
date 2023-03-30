@@ -1,4 +1,33 @@
 # nauka_gita
+How to fix support for password authentication was removed on GitHub
+Understanding how to configure and use Access Tokens in GitHub
+Photo by Twitter @ethmessages on Unsplash
+Introduction
+
+In July 2020, GitHub announced their intent to require users to use token-based authentication in order to perform certain (authenticated) Git operations. Going forward and as of the 13th of August 2021, account passwords are no longer accepted when authenticating with the REST API.
+
+For instance, if you attempt to push on the remote server using password authentication the operation will fail with the following message:
+
+Support for password authentication was removed on August 13, 2021. Please use a personal access token instead
+
+The recent changes affect the command line access to Git as well as any services accessing GitHub repositories directly with the use of password. On the other hand, if you have already enabled the two-factor authentication you are required to use a token-based authentication (or SSH-based authentication) and therefore you shouldn’t be seeing the error mentioned above.
+
+In today’s article we will discuss we will go through a quick step by step guide that will help you configure Access Tokens on GitHub that we’ll allow you to perform token-based authentication when executing Git operations that require you doing so.
+Reproducing the error
+
+Now let’s assume that you’ve initialised a Git repository (git init), you’ve done some work and created a commit and finally you want to push the changes made to the remote host.
+
+$ git push -U origin main
+Username for 'https://github.com': <username>
+Password for 'https://your-username@github.com': 
+remote: Support for password authentication was removed on August 13, 2021. Please use a personal access token instead.
+remote: Please see https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/ for more information.
+fatal: Authentication failed for 'https://github.com/<username>/repo-name.git/'
+
+Given that you are attempting to perform password-based authentication, the push command will fail with the authentication fatal error shown above.
+Fixing the error: A step by step guide
+
+In the following sections we will go through a step by step guide that will help you configure Access Tokens on GitHub so that you can perform token-based authentication when performing Git operations requiring authentication.
 Step 1: Create Access Token on GitHub
 
 First of all, you must create a personal Access Token on GitHub. To do so follow the steps below:
@@ -36,3 +65,10 @@ Now we have successfully configured token-based authentication for a specific re
 $ git push -u origin main
 
 and the Git operation should be executed with no issues.
+Final Thoughts
+
+In today’s short guide we discussed about the recent changes made on GitHub that now require users to perform token-based authentication as password-based authentication are no longer accepted.
+
+Additionally, we went through a step-by-step guide that will help you configure your GitHub Access Tokens that will allow you to properly authenticate Git operations.
+
+Become a member and read every story on Medium. Your membership fee directly supports me and other writers you read. You’ll also get full access to every story on Medium.
